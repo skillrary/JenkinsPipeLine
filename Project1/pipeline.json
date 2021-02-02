@@ -1,0 +1,36 @@
+pipeline{
+agent any
+        
+    stages{
+       
+    
+        stage('GitClone') {
+            steps{
+                git credentialsId: 'github', url: 'https://github.com/skillrary/Terraform-Course-Files'
+            }
+        }
+    
+        
+        stage('init') {
+            steps{
+                sh 'terraform init'
+            }
+        }
+    
+        stage('Plan') {
+            steps{
+                sh 'terraform plan'
+            }
+    
+        
+        }
+        
+        stage('Apply') {
+            steps{
+                sh 'terraform apply --auto-approve'
+            }
+    
+        
+        }
+    }
+}
